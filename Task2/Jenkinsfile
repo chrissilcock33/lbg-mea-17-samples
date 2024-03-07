@@ -35,6 +35,7 @@ pipeline {
     }
     post {
         always {
+            echo "these things will always happen"
             //sh "docker system prune -f"
         }
     }
