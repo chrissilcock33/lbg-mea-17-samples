@@ -17,6 +17,7 @@ pipeline {
                 echo "Testing..."
                 sh "sleep 5"
                 echo "PASSED"
+                echo "lets go"
             }
         }
         stage('Deploy') {
