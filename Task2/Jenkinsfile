@@ -1,6 +1,6 @@
 pipeline {
     agent any
-    env {
+    environment {
         DOCKER_USER = "chrissilcock33"
         MYSQL_ROOT_PASSWORD = "password123"
     }
