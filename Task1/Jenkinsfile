@@ -31,7 +31,7 @@ pipeline {
                 sh "kubectl create ns task1 || true"
                 sh "sed -e 's,{{YOUR_NAME}},'$YOUR_NAME',g;' Task1/pod-w-services/app-config.yaml | tee Task1/pod-w-services/app-config-populated.yaml"
                 sh "rm Task1/pod-w-services/app-config.yaml"
-                sh "kubectl apply -f Task1/pod-w-services"
+                sh "kubectl apply -f Task1/pod-w-services --namespace task1"
                 sh "sleep 60"
                 sh "kubectl get services --namespace task1"
             }
