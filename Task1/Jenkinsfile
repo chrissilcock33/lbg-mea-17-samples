@@ -16,8 +16,10 @@ pipeline {
         stage('Test') {
             steps {
                 echo "Testing..."
-
-            }
+                echo "YOUR_NAME = $YOUR_NAME"            
+                echo "REGISTRY = $REGISTRY"
+                echo "VERSION = $VERSION"
+                }
         }
         stage('Push') {
             steps {
