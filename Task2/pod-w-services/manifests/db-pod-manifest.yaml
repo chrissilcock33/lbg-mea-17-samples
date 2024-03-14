@@ -6,7 +6,7 @@ metadata:
   name: db-pod-1
 spec:
   containers:
-  - image: eu.gcr.io/lbg-mea-17/chris-s-task2-db:v1
+  - image: eu.gcr.io/lbg-mea-17/chris-s-task2-db:{{VERSION}}
     imagePullPolicy: IfNotPresent
     name: db-pod-1
     env:

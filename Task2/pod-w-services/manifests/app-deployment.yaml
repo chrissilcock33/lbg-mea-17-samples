@@ -19,7 +19,7 @@ spec:
         run: flask-app-1
     spec: 
       containers:
-      - image: eu.gcr.io/lbg-mea-17/chris-s-task2-flask-app:v1
+      - image: eu.gcr.io/lbg-mea-17/chris-s-task2-flask-app:{{VERSION}}
         imagePullPolicy: IfNotPresent
         name: flask-app-1
         env:
