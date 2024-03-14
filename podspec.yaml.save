@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: example-pod
+  name: example-pod-2
+spec:
+  containers:
+  - image: eu.gcr.io/lbg-mea-17/chris-s-task1-app:v1
+    imagePullPolicy: IfNotPresent
+    name: example-pod-2
+    env"Hello from the environment":
+    - name: YOUR_NAME
+      value: thing

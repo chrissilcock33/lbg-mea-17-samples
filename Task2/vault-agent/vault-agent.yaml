@@ -1,0 +1,42 @@
+apiVersion: v1
+data:
+  vault-agent-config.hcl: |
+    # Comment this out if running as sidecar instead of initContainer
+    #exit_after_auth = true
+
+    pid_file = "/home/vault/pidfile"
+
+    auto_auth {
+        method "kubernetes" {
+            mount_path = "auth/kubernetes"
+            config = {
+                role = "example"
+            }
+        }
+
+        sink "file" {
+            config = {
+                path = "/home/vault/.vault-token"
+            }
+        }
+    }
+
+    template {
+    create_dest_dirs = true
+    destination = "/etc/secrets/secret1.txt"
+    contents = <<EOT
+    {{ with secret "kv2/data/mysql" }}
+    MYSQL_ROOT_PASSWORD: {{ .Data.data.MYSQL_ROOT_PASSWORD }}
+    {{ end }}
+
+    EOT
+    
+    exec {
+      command = ["usr/local/bin/kubectl", "create", "secret", "generic", "MYSQL_ROOT_PASSWORD2", "--from-file=password=/etc/secrets/secret1.txt"]
+    }
+
+    }
+kind: ConfigMap
+metadata:
+  name: example-vault-agent-config
+  namespace: default

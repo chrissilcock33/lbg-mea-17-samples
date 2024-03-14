@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: db-pod-1
+  name: db-pod-1
+spec:
+  containers:
+  - image: eu.gcr.io/lbg-mea-17/chris-s-task2-db:v1
+    imagePullPolicy: IfNotPresent
+    name: db-pod-1
+    env:
+    - name: MYSQL_ROOT_PASSWORD
+      valueFrom: 
+        secretKeyRef: 
+          name: db-creds
+          key: MYSQL_ROOT_PASSWORD
+  volumes:
+    - configMap:
+        items:
+          - key: vault-agent-config.hcl
+            path: vault-agent-config.hcl
+        name: example-vault-agent-config
+      name: config
+    - emptyDir: {}
+      name: shared-data

@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: flask-app-1
+  name: app-deployment
+spec:
+  strategy:
+    rollingUpdate:
+      maxSurge: 33%
+      maxUnavailable: 33%
+  selector:
+    matchLabels:
+      run: flask-app-1
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        run: flask-app-1
+    spec: 
+      containers:
+      - image: eu.gcr.io/lbg-mea-17/chris-s-task2-flask-app:v1
+        imagePullPolicy: IfNotPresent
+        name: flask-app-1
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom: 
+            secretKeyRef: 
+              name: db-creds
+              key: MYSQL_ROOT_PASSWORD

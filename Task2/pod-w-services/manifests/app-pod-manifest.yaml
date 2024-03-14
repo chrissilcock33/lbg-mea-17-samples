@@ -1,0 +1,17 @@
+# apiVersion: v1
+# kind: Pod
+# metadata:
+#   labels:
+#     run: flask-app-1
+#   name: flask-app-1
+# spec:
+#   containers:
+#   - image: eu.gcr.io/lbg-mea-17/chris-s-task2-flask-app:v1
+#     imagePullPolicy: IfNotPresent
+#     name: flask-app-1
+#     env:
+#     - name: MYSQL_ROOT_PASSWORD
+#       valueFrom: 
+#         secretKeyRef: 
+#           name: db-creds
+#           key: MYSQL_ROOT_PASSWORD
