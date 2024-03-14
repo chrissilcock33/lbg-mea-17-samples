@@ -9,7 +9,7 @@ pipeline {
         stage('Build and Push') {
             steps {
                 echo "Building..."
-                sh "docker build -t $REGISTRY/task1-app:$VERSION Task1"
+                sh "docker build -t $REGISTRY/chris-s-task1-app:$VERSION Task1"
 
             }
         }
@@ -24,7 +24,7 @@ pipeline {
         stage('Push') {
             steps {
                 sh "gcloud config set account chris-s-container-registry@lbg-mea-17.iam.gserviceaccount.com"
-                sh "docker push $REGISTRY/task1-app:$VERSION"
+                sh "docker push $REGISTRY/chris-s-task1-app:$VERSION"
             }
         }
          stage('Deploy') {
